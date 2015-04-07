@@ -20,7 +20,7 @@ os.system('clear')
 # camera
 def triggerCamera(gpsData):
 
-    gpsCoordinatesOptions = ""
+    gpsCoordinatesOptions = gpsData
 
     dateString = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
 
@@ -98,19 +98,36 @@ class GpsPoller(threading.Thread):
 
 if __name__ == '__main__' :
     gpsp = GpsPoller()
+  #Set to number of hardcoded coordinates
+    hardCodedGPSCount = 1
+
+  #when hardcoding the gps coordinates go to the 5th decimal for a range of 3.5ft from target or 
+  #the 6th for a 0.36 ft from target
     waypoint_a = {'latitude' : 41.56654, 'longitude': -74.0547, 'altitude' : 182}
+   
+  #This could be one way to set the range. Just would have to do it for each longitude and latitude. Not sure if its legal with the subtraction 
+  #within the range function
+   w_aLatRange = range(waypoint_a['latitude'] - 0.00005, waypoint_a['latitude'] + 0.00005) 
+   w_aLongRange = range(waypoint_a['longitude'] - 0.00005,waypoint_a['longitude'] +0.00005)
     try:
         gpsp.start()
         while True:
 
             os.system('clear')
             gpsData = {'latitude' : gpsd.fix.latitude, 'longitude': gpsd.fix.longitude, 'altitude' : gpsd.fix.altitude}	# unformated gps data 	
-            if(gpsData['latitude'] > 40.00):  #waypoint_a['latitude']):
-                if(gpsData['longitude'] > -75.00): #waypoint_a['longitude']):
+           
+   #Compound if statement to test if in range of waypoint_a
+             if gpsData['latitude'] in w_aLatRange and (gpsData['longitude'] in waypoint_a['longitude'] and  gpsData['altitude'] >= waypoint_a['altitude'] : 
                     triggerCamera(gpsData)
                     print "Camera Triggered"
-                            
-
+                    hardCodedGPSCount -= 1
+	#once we take the picture we want it to sleep until we get out of the waypoint range
+		    sleep(10)
+            if hardCodedGPSCount == 0:              
+	 	print "\nMission Complete!!"   
+		print "\nKilling Thread..."
+		gpsp.join()   
+	 	break
     except (KeyboardInterrupt, SystemExit):
         print "\nKilling Thread..."
         gpsp.running = False
