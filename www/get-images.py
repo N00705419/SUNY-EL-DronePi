@@ -6,12 +6,12 @@ def dict_factory(cursor, row):
         d[col[0]] = row[idx]
     return d
 
-connection = sqlite3.connect("database/pi_database.db")
+connection = sqlite3.connect("./database/pi_database.db")
 connection.row_factory = dict_factory
 
 cursor = connection.cursor()
 
-cursor.execute("select * from images")
+cursor.execute("SELECT * FROM images DESC")
 
 # fetch all or one we'll go for all.
 
