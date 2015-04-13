@@ -16,8 +16,7 @@ class Database:
     # receives an the data object with format: data = { 'dateTime': '', 'pathToImage': '', 'latitude': '', 'longitude': '', 'altitude': '' } and saves it to the database
     def dataEntry(self, data):
         with self.conn:
-            print "saving to db..."
             self.cur.execute("INSERT INTO images (dateTime, path_to_image, latitude, longitude, altitude) VALUES( ?, ?, ?, ?, ?)", (data['dateTime'], data['pathToImage'], data['latitude'], data['longitude'], data['altitude']))
             self.conn.commit()
-            print("Image successfully recorded in the database")
-            os.system( "echo 'data saved in the database' >> log.txt" )
+            # print("Data successfully recorded in the database")
+            # os.system( "echo 'data saved in the database' >> log.txt" )
