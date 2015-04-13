@@ -1,4 +1,4 @@
-class Gps(object):
+class GpsPi(object):
 	"""docstring for Gps"""
 	def read(self):
 		# temporary mock
