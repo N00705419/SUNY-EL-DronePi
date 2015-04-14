@@ -83,6 +83,33 @@ def triggerCamera(gpsData):
     # gpsDataFormated['altitude'] = gpsData['altitude'] + '/10'
     # return gpsDataFormated
 
+def getMission():
+    waypoint_1 = {'latitude' : 41.73647, 'longitude': -74.0874}
+    waypoint_2 = {'latitude' : 41.7365, 'longitude': -74.0874}
+
+    mission = [ waypoint_1, waypoint_2 ]
+
+    return mission
+
+def isInsideRange(gpsData, coordinatesRange, mission):
+
+    for waypoint in mission:
+
+        if( gpsData['latitude'] < waypoint['latitude'] + coordinatesRange and
+            gpsData['latitude'] > waypoint['latitude'] - coordinatesRange):
+
+            if( gpsData['longitude'] < waypoint['longitude'] + coordinatesRange and
+                gpsData['longitude'] > waypoint['longitude'] - coordinatesRange):
+
+                print ("Waypoint reached:")
+                print (waypoint)
+                mission.remove(waypoint)
+                return True
+            else:
+                return False
+        else:
+            return False
+
 
 class GpsPoller(threading.Thread):
     def __init__(self):
@@ -98,33 +125,32 @@ class GpsPoller(threading.Thread):
             gpsd.next()
 
 
-# if __name__ == '__main__' :
-#     gpsp = GpsPoller()
-#     waypoint_a = {'latitude' : 41.56654, 'longitude': -74.0547, 'altitude' : 182}
-#     try:
-#         gpsp.start()
-#         while True:
+if __name__ == '__main__' :
+    gpsp = GpsPoller()
+    coordinatesRange = 0.0001
+    mission = getMission()
+    try:
+        gpsp.start()
+        while True:
+            # os.system('clear')
+            gpsData = {'latitude' : gpsd.fix.latitude, 'longitude': gpsd.fix.longitude, 'altitude' : gpsd.fix.altitude} # unformated gps data
 
-#             os.system('clear')
-#             gpsData = {'latitude' : gpsd.fix.latitude, 'longitude': gpsd.fix.longitude, 'altitude' : gpsd.fix.altitude}	# unformated gps data
-#             if(gpsData['latitude'] > 40.00):  #waypoint_a['latitude']):
-#                 if(gpsData['longitude'] > -75.00): #waypoint_a['longitude']):
-#                     print gpsData
-#                     triggerCamera(gpsData)
-#                     print "Camera Triggered"
+            # print('Reading gps')
+            print(gpsData)
 
+            if (isInsideRange(gpsData, coordinatesRange, mission)):
 
-#     except (KeyboardInterrupt, SystemExit):
-#         print "\nKilling Thread..."
-#         gpsp.running = False
-#         gpsp.join()
-#         print "Done. \nExiting."
+                time.sleep(10) #wait drone stabilize
+                try:
+                    triggerCamera(gpsData)
+                    time.sleep(15) #wait picture to be taken
+                except Exception, e:
+                    print "Unexpected error:", sys.exc_info()[0]
+                else:
+                    print "Successful Waypoint"
 
-gpsData = {}
-gpsData['latitude'] = '41.7365927'
-gpsData['longitude'] = '-74.0874642'
-gpsData['altitude'] = '71'
-
-# TODO gps reading
-
-triggerCamera(gpsData)
+    except (KeyboardInterrupt, SystemExit):
+        print "\nKilling Thread..."
+        gpsp.running = False
+        gpsp.join()
+        print "Done. \nExiting."
