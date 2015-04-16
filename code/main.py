@@ -102,7 +102,7 @@ def getMission(pathToFile = 'mission.txt'):
     return mission
 
 def isInsideRange(gpsData, coordinatesRange, mission):
-    #verifies if the gpsData is inside a squared range built with the waipoint coordinates plus a range pre determined bu the user
+    #verifies if the gpsData is inside a squared range built with the waipoint coordinates plus a range pre determined by the user
     for waypoint in mission:
 
         # if (gpsData['altitude'] > 5.0):
@@ -115,7 +115,7 @@ def isInsideRange(gpsData, coordinatesRange, mission):
                 print ("Waypoint reached:")
                 print (waypoint)
                 mission.remove(waypoint)
-                print ("Waypoint removed from mission")
+                print ("Waypoint removed from list")
                 return True
             else:
                 return False
@@ -138,24 +138,27 @@ class GpsPoller(threading.Thread):
 
 
 if __name__ == '__main__' :
+
     gpsp = GpsPoller()
     coordinatesRange = 0.0001
     mission = getMission()
+
     try:
         gpsp.start()
         while True:
             os.system('clear')
-            gpsData = {'latitude' : gpsd.fix.latitude, 'longitude': gpsd.fix.longitude, 'altitude' : gpsd.fix.altitude} # unformated gps data
+            gpsData = {'latitude' : gpsd.fix.latitude, 'longitude': gpsd.fix.longitude, 'altitude' : gpsd.fix.altitude}
 
             print('Reading gps')
             print(gpsData)
 
             if (isInsideRange(gpsData, coordinatesRange, mission)):
-
-                time.sleep(10) #wait drone stabilize
+                print ("Waiting for drone to stabilize")
+                time.sleep(10)
                 try:
                     triggerCamera(gpsData)
-                    time.sleep(15) #wait picture to be taken
+                    print("Waiting for picture to be taken")
+                    time.sleep(15)
                 except Exception, e:
                     print "Range error:", sys.exc_info()[0]
                 else:
@@ -166,5 +169,3 @@ if __name__ == '__main__' :
         gpsp.running = False
         gpsp.join()
         print "Done. \nExiting."
-
-# print getMission()
