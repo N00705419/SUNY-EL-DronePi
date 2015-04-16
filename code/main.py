@@ -91,12 +91,13 @@ def getMission(pathToFile = 'mission.txt'):
         fileMission = list(reader)
 
     fileMissionLength = len(fileMission) - 1
-    mission = [[0 for x in range(3)] for x in range(fileMissionLength - 1)]
+    # mission is an array of dictionaries
+    mission = dictlist = [dict() for x in range(fileMissionLength - 1)]
 
     for x in range(2, fileMissionLength + 1):
-        mission[x - 2][0] = fileMission[x][8]
-        mission[x - 2][1] = fileMission[x][9]
-        mission[x - 2][2] = fileMission[x][10]
+        mission[x - 2]['latitude'] = float(fileMission[x][8])
+        mission[x - 2]['longitude'] = float(fileMission[x][9])
+        mission[x - 2]['altitude'] = float(fileMission[x][10])
 
     return mission
 
@@ -104,21 +105,22 @@ def isInsideRange(gpsData, coordinatesRange, mission):
     #verifies if the gpsData is inside a squared range built with the waipoint coordinates plus a range pre determined bu the user
     for waypoint in mission:
 
-        if (gpsData['altitude'] > 5):
-            if( gpsData['latitude'] < waypoint['latitude'] + coordinatesRange and
-                gpsData['latitude'] > waypoint['latitude'] - coordinatesRange):
+        # if (gpsData['altitude'] > 5.0):
+        if( gpsData['latitude'] < waypoint['latitude'] + coordinatesRange and
+            gpsData['latitude'] > waypoint['latitude'] - coordinatesRange):
 
-                if( gpsData['longitude'] < waypoint['longitude'] + coordinatesRange and
-                    gpsData['longitude'] > waypoint['longitude'] - coordinatesRange):
+            if( gpsData['longitude'] < waypoint['longitude'] + coordinatesRange and
+                gpsData['longitude'] > waypoint['longitude'] - coordinatesRange):
 
-                    print ("Waypoint reached:")
-                    print (waypoint)
-                    mission.remove(waypoint)
-                    return True
-                else:
-                    return False
+                print ("Waypoint reached:")
+                print (waypoint)
+                mission.remove(waypoint)
+                print ("Waypoint removed from mission")
+                return True
             else:
                 return False
+        else:
+            return False
 
 
 class GpsPoller(threading.Thread):
@@ -165,4 +167,4 @@ if __name__ == '__main__' :
         gpsp.join()
         print "Done. \nExiting."
 
-print getMission()
+# print getMission()
