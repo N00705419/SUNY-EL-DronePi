@@ -29,7 +29,7 @@
 		-ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 		transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 		border-bottom: dotted 1px;
-		color: #e89980;
+		color: rgb(0, 62, 126);
 		text-decoration: none;
 	}
 
@@ -1310,103 +1310,6 @@
 	body.landing #main {
 		margin-top: -14em;
 	}
-	
-
-/* Additions */
-
-@media only screen and (max-device-width: 480px) {
-.el-drone-logo {max-width:200px; padding-bottom:45px;}}
-
-.team-block {width:20%;}
-
-.el-about {margin-bottom: 0px;}
-.el-team {background-color:#3983C3;color:#ffffff;margin-bottom:0px;}
-.el-team h2, .el-team header p {color:#ffffff;}
-
-
-.drone-button {background-color:rgb(0, 62, 126)!important;}
-
-.el-maps {
-        position: relative;
-        padding-bottom: 500px;  // This is the aspect ratio*/
-        height: 0;
-        overflow: hidden;	
-    }
-.el-maps iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100% !important;
-        height: 500px!important;
-}
-
-.el-drone-logo {width:600px;padding-bottom:45px;}
-.el-np-logo {height:100%;margin:0;padding:0;}
-#header a{border:none;}
-.el-np-rpi-logo {padding-left:10px;height:100%;margin:0;}
-
-.el-tabs-container {width:50%;margin:auto;}
-
-#el-tabs {
-  overflow: auto;
-  width: 100%;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-#el-tabs li {
-    margin: 0;
-    padding: 0;
-    float: left;
-}
-
-#el-tabs a {
-    box-shadow: -4px 0 0 rgba(0, 0, 0, .2);
-    background: #ad1c1c;
-    background: linear-gradient(220deg, transparent 10px, rgb(0, 62, 126) 10px);
-    text-shadow: 0 1px 0 rgba(0,0,0,.5);
-    color: #fff;
-    float: left;
-    font: bold 12px/35px 'Lucida sans', Arial, Helvetica;
-    height: 35px;
-    padding: 0 30px;
-	border: none;
-}
-
-#el-tabs a:hover {
-    background: #c93434;
-    background: linear-gradient(220deg, transparent 10px, #3983C3 10px);    
-    border: none;
-}
-
-#el-tabs a:focus {
-    outline: 0;
-}
-
-#el-tabs #current a {
-    background: #fff;
-    background: linear-gradient(220deg, transparent 10px, #3983C3 10px);
-    text-shadow: none;    
-    color: #fff;
-    border: none;
-}
-
-#el-content {
-    background-color: #fff;
-    background-image:         linear-gradient(top, #fff, #ddd);
-    border-radius: 0 2px 2px 2px;
-    box-shadow: 1px 2px 2px #000, 0 -1px 0 #fff inset;
-    padding: 30px;
-	border-top: 1px solid #000;
-	border-left: 1px solid #000;
-	text-align:left;
-}
-
-/*
-#el-content div {
-    height: 220px; 
-}*/
 
 /* Footer */
 
@@ -1519,3 +1422,108 @@
 		#cta .formerize-placeholder {
 			color: rgba(255, 255, 255, 0.75) !important;
 		}
+		
+	
+
+/* Embeded Linux 2015 Additions */
+
+@media only screen and (max-device-width: 480px) {
+.el-drone-logo {max-width:200px; padding-bottom:45px;}}
+
+.team-block {width:20%;}
+
+.el-about {margin-bottom: 0px;}
+.el-team {background-color:#3983C3;color:#ffffff;margin-bottom:0px;}
+.el-team h2, .el-team header p {color:#ffffff;}
+
+
+.drone-button {background-color:rgb(0, 62, 126)!important;}
+
+.el-maps {
+        position: relative;
+        padding-bottom: 500px;  // This is the aspect ratio*/
+        height: 0;
+        overflow: hidden;	
+    }
+.el-maps iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 500px!important;
+}
+
+/* Stop Maps API from Scrolling in Embeded unless clicked
+.scrolloff {
+        pointer-events: none;
+}*/
+
+.el-drone-logo {width:600px;padding-bottom:45px;}
+.el-np-logo {height:100%;margin:0;padding:0;}
+#header a{border:none;}
+.el-np-rpi-logo {padding-left:10px;height:100%;margin:0;}
+
+.el-tabs-container {width:50%;margin:auto;}
+
+#el-tabs {
+  overflow: auto;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#el-tabs li {
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+#el-tabs a {
+    box-shadow: -4px 0 0 rgba(0, 0, 0, .2);
+    background: #ad1c1c;
+    background: linear-gradient(220deg, transparent 10px, rgb(0, 62, 126) 10px);
+    text-shadow: 0 1px 0 rgba(0,0,0,.5);
+    color: #fff;
+    float: left;
+    font: bold 12px/35px 'Lucida sans', Arial, Helvetica;
+    height: 35px;
+    padding: 0 30px;
+	border: none;
+}
+
+#el-tabs a:hover {
+    background: #c93434;
+    background: linear-gradient(220deg, transparent 10px, #3983C3 10px);    
+    border: none;
+}
+
+#el-tabs a:focus {
+    outline: 0;
+}
+
+#el-tabs #current a {
+    background: #fff;
+    background: linear-gradient(220deg, transparent 10px, #3983C3 10px);
+    text-shadow: none;    
+    color: #fff;
+    border: none;
+}
+
+#el-content {
+    background-color: #fff;
+    background-image:         linear-gradient(top, #fff, #ddd);
+    border-radius: 0 2px 2px 2px;
+    box-shadow: 1px 2px 2px #000, 0 -1px 0 #fff inset;
+    padding: 30px;
+	border-top: 1px solid #000;
+	border-left: 1px solid #000;
+	text-align:left;
+}
+
+#el-content ul {margin:0 0 0 0;}
+
+/*
+#el-content div {
+    height: 220px; 
+}*/
