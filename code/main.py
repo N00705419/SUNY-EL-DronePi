@@ -85,30 +85,26 @@ def triggerCamera(gpsData):
     # return gpsDataFormated
 
 def getMission(pathToFile = 'mission.txt'):
-    # not working!!!
-    # with open(pathToFile) as f:
-    #     reader = csv.reader(f, delimiter="\t")
-    #     fileMission = list(reader)
+    # reads from the file exported from mission control and parses the latitude, longitude and altitude to a list
+    with open(pathToFile) as f:
+        reader = csv.reader(f, delimiter="\t")
+        fileMission = list(reader)
 
-    # fileMissionLength = len(fileMission) - 1
-    # mission = [[0 for x in range(2)] for x in range(fileMissionLength - 1)]
+    fileMissionLength = len(fileMission) - 1
+    mission = [[0 for x in range(3)] for x in range(fileMissionLength - 1)]
 
-    # for x in xrange(2, fileMissionLength - 1):
-    #     mission[x - 2][0] = fileMission[x][8]
-    #     mission[x - 2][1] = fileMission[x][9]
-
-    waypoint_1 = {'latitude' : 41.73647, 'longitude': -74.0874}
-    waypoint_2 = {'latitude' : 41.7365, 'longitude': -74.0874}
-
-    mission = [ waypoint_1, waypoint_2 ]
+    for x in range(2, fileMissionLength + 1):
+        mission[x - 2][0] = fileMission[x][8]
+        mission[x - 2][1] = fileMission[x][9]
+        mission[x - 2][2] = fileMission[x][10]
 
     return mission
 
 def isInsideRange(gpsData, coordinatesRange, mission):
-
+    #verifies if the gpsData is inside a squared range built with the waipoint coordinates plus a range pre determined bu the user
     for waypoint in mission:
 
-        if (waypoint['altitude'] > 20)
+        if (gpsData['altitude'] > 5):
             if( gpsData['latitude'] < waypoint['latitude'] + coordinatesRange and
                 gpsData['latitude'] > waypoint['latitude'] - coordinatesRange):
 
@@ -169,4 +165,4 @@ if __name__ == '__main__' :
         gpsp.join()
         print "Done. \nExiting."
 
-# print getMission('mission.txt')
+print getMission()
