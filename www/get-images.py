@@ -21,3 +21,14 @@ results = cursor.fetchall()
 print results
 
 connection.close()
+
+def application(env, start_response):
+    start_response('200 OK', [('Content-Type','text/html')])
+
+    html = "<h1>Hello World From Python</h1>\n"
+    html += "<table>\n"
+    for k in env:
+        html += "<tr><td>{}</td><td>{}</td></tr>\n".format(k, env[k])
+    html += "</table>\n"
+
+    return html
