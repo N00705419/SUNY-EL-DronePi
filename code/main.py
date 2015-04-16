@@ -6,6 +6,7 @@ import time
 import datetime
 import database
 import os
+import csv
 #import GpsPoller
 
 
@@ -83,7 +84,19 @@ def triggerCamera(gpsData):
     # gpsDataFormated['altitude'] = gpsData['altitude'] + '/10'
     # return gpsDataFormated
 
-def getMission():
+def getMission(pathToFile = 'mission.txt'):
+    # not working!!!
+    # with open(pathToFile) as f:
+    #     reader = csv.reader(f, delimiter="\t")
+    #     fileMission = list(reader)
+
+    # fileMissionLength = len(fileMission) - 1
+    # mission = [[0 for x in range(2)] for x in range(fileMissionLength - 1)]
+
+    # for x in xrange(2, fileMissionLength - 1):
+    #     mission[x - 2][0] = fileMission[x][8]
+    #     mission[x - 2][1] = fileMission[x][9]
+
     waypoint_1 = {'latitude' : 41.73647, 'longitude': -74.0874}
     waypoint_2 = {'latitude' : 41.7365, 'longitude': -74.0874}
 
@@ -95,20 +108,21 @@ def isInsideRange(gpsData, coordinatesRange, mission):
 
     for waypoint in mission:
 
-        if( gpsData['latitude'] < waypoint['latitude'] + coordinatesRange and
-            gpsData['latitude'] > waypoint['latitude'] - coordinatesRange):
+        if (waypoint['altitude'] > 20)
+            if( gpsData['latitude'] < waypoint['latitude'] + coordinatesRange and
+                gpsData['latitude'] > waypoint['latitude'] - coordinatesRange):
 
-            if( gpsData['longitude'] < waypoint['longitude'] + coordinatesRange and
-                gpsData['longitude'] > waypoint['longitude'] - coordinatesRange):
+                if( gpsData['longitude'] < waypoint['longitude'] + coordinatesRange and
+                    gpsData['longitude'] > waypoint['longitude'] - coordinatesRange):
 
-                print ("Waypoint reached:")
-                print (waypoint)
-                mission.remove(waypoint)
-                return True
+                    print ("Waypoint reached:")
+                    print (waypoint)
+                    mission.remove(waypoint)
+                    return True
+                else:
+                    return False
             else:
                 return False
-        else:
-            return False
 
 
 class GpsPoller(threading.Thread):
@@ -132,10 +146,10 @@ if __name__ == '__main__' :
     try:
         gpsp.start()
         while True:
-            # os.system('clear')
+            os.system('clear')
             gpsData = {'latitude' : gpsd.fix.latitude, 'longitude': gpsd.fix.longitude, 'altitude' : gpsd.fix.altitude} # unformated gps data
 
-            # print('Reading gps')
+            print('Reading gps')
             print(gpsData)
 
             if (isInsideRange(gpsData, coordinatesRange, mission)):
@@ -145,7 +159,7 @@ if __name__ == '__main__' :
                     triggerCamera(gpsData)
                     time.sleep(15) #wait picture to be taken
                 except Exception, e:
-                    print "Unexpected error:", sys.exc_info()[0]
+                    print "Range error:", sys.exc_info()[0]
                 else:
                     print "Successful Waypoint"
 
@@ -154,3 +168,5 @@ if __name__ == '__main__' :
         gpsp.running = False
         gpsp.join()
         print "Done. \nExiting."
+
+# print getMission('mission.txt')
