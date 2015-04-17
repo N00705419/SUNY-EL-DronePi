@@ -162,7 +162,7 @@ if __name__ == '__main__' :
                 except Exception, e:
                     print "Range error:", sys.exc_info()[0]
                 else:
-                    print "Successful Waypoint"
+                    print "Waypoint task successful"
 
     except (KeyboardInterrupt, SystemExit):
         print "\nKilling Thread..."
