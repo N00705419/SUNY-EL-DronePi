@@ -19,7 +19,7 @@ var DataProcessing = (function () {
       url: 'get-images.php',
       dataType: 'json',
       async: false,
-      success: function(data) {
+      success: function (data) {
         imagesData = data;
       }
     });
@@ -29,15 +29,15 @@ var DataProcessing = (function () {
 
   var _prepareGallery = function () {
   //prepare images array for gallery
-    $.each(imagesData, function(index, element) {
-        CB_Gallery[index + 1] = [];
-        CB_Gallery[index + 1][0]= element["path_to_image"] ;
-        CB_Gallery[index + 1][1]= "image" ;
-        CB_Gallery[index + 1][2]= element["id"] ;
-        CB_Gallery[index + 1][3]= 450 ;
-        CB_Gallery[index + 1][4]= 338 ;
-        CB_Gallery[index + 1][5]= element["path_to_image"] ;
-        CB_Gallery[index + 1][9]= "on" ;
+    $.each(imagesData, function (index, element) {
+      CB_Gallery[index + 1] = [];
+      CB_Gallery[index + 1][0] = element.path_to_image;
+      CB_Gallery[index + 1][1] = "image";
+      CB_Gallery[index + 1][2] = element.id;
+      CB_Gallery[index + 1][3] = 450;
+      CB_Gallery[index + 1][4] = 338;
+      CB_Gallery[index + 1][5] = element.path_to_image;
+      CB_Gallery[index + 1][9] = "on";
     });
   };
 
@@ -126,9 +126,7 @@ function setMarkers(map, locations) {
     content: contentString
   });
 
-
   google.maps.event.addListener(marker, "click", function () {
-
 
 		// close any open infowindows
     infowindow.close();
@@ -140,7 +138,7 @@ function setMarkers(map, locations) {
 }
 }
 
-function initialize() {
+function initialize () {
 
   var markers = DataProcessing.getMarkers();
 
