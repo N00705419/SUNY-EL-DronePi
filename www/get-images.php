@@ -11,9 +11,16 @@ $result->setFetchMode(PDO::FETCH_ASSOC);
 
 while ($row = $result->fetch()) {
 
-extract($row);
+  extract($row);
 
-$data[] = array($id, $dateTime, $path_to_image, $latitude, $longitude, $altitude);
+  $data[] = array(
+                  'id' => $id,
+                  'dateTime' => $dateTime,
+                  'path_to_image' => $path_to_image,
+                  'latitude' => $latitude,
+                  'longitude' => $longitude,
+                  'altitude' => $altitude
+                  );
 }
 
 $data = json_encode($data);
