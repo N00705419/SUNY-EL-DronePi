@@ -1,4 +1,22 @@
 
+// get images
+CB_Gallery=[]; // creates the array
+CB_Gallery[0]='myphotos'; // name of the gallery
+var imagesData = null;
+
+$.getJSON('get-images.php', function(data) {
+    imagesData = data;
+    $.each(data, function(index, element) {
+        CB_Gallery[index + 1] = []
+        CB_Gallery[index + 1][0]= element['path_to_image']; // the url of the item
+        CB_Gallery[index + 1][1]= 'image'; // the type of the item (values: flash, html, iframe, image, inner, quicktime, winmedia)
+        CB_Gallery[index + 1][2]= element['id']; // the title or caption of the item
+        CB_Gallery[index + 1][3]= 450; // the width of the item
+        CB_Gallery[index + 1][4]= 338; // the height of the item
+        CB_Gallery[index + 1][5]= element['path_to_image']; // the thumbnail url of the item
+        CB_Gallery[index + 1][9]= 'on'; // the closeonh parameter (if it is off, clearbox won't close if you click on the background.)
+    });
+});
 
 // global "map" variable
       var map = null;
@@ -6,7 +24,7 @@
       var infowindow = null;
 
 
-// create the markers 
+// create the markers
 
 var markers = [
   ['<h3>Slimbox: Image Slideshow Old Main</h3>', 41.744192, -74.083375, 2, "<div class=\"infowindow\"><p>This example produces a lightbox for an image array, over Old Main.</p><a href=\"images/image-1.jpg\" onclick='jQuery.slimbox([[\"images/image-2.jpg\", \"caption 1\"], [\"images/image-1.jpg\", \"caption 2\"]], 0);return false' rel=\"lightbox-groupname\" ><img src=\"images/image-2-thumb.jpg\"><img src=\"images/image-1-thumb.jpg\"></a><br /><br /></div>"]];
@@ -67,10 +85,10 @@ function setMarkers(map, locations) {
         icon: image,
         shape: shape,
         title: mymarker[0],
-		html:  "<p>" + mymarker[0] + "</p>" + mymarker[4], 
+		html:  "<p>" + mymarker[0] + "</p>" + mymarker[4],
         zIndex: mymarker[3]
     });
-	
+
 
 	// create a content "shell" for the infowindow
 	var contentString = "Some content";
@@ -79,17 +97,17 @@ function setMarkers(map, locations) {
                 content: contentString
             });
 
-		
-            google.maps.event.addListener(marker, "click", function () {
-       
 
-		// close any open infowindows	     
+            google.maps.event.addListener(marker, "click", function () {
+
+
+		// close any open infowindows
         infowindow.close();
-     
+
                infowindow.setContent(this.html);
                 infowindow.open(map, this);
                 infowindow.zIndex(10);
-            });			
+            });
   }
 }
 
