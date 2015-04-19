@@ -14,12 +14,12 @@ while ($row = $result->fetch()) {
   extract($row);
 
   $data[] = array(
-                  'id' => $id,
-                  'dateTime' => $dateTime,
-                  'path_to_image' => $path_to_image,
-                  'latitude' => $latitude,
-                  'longitude' => $longitude,
-                  'altitude' => $altitude
+                  "id" => $id,
+                  "dateTime" => $dateTime,
+                  "path_to_image" => $path_to_image,
+                  "latitude" => $latitude,
+                  "longitude" => $longitude,
+                  "altitude" => $altitude
                   );
 }
 
