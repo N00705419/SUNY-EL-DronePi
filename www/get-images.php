@@ -13,7 +13,7 @@ while ($row = $result->fetch()) {
 
 extract($row);
 
-$data[] = array($dateTime, $path_to_image, $latitude, $longitude, $altitude);
+$data[] = array($id, $dateTime, $path_to_image, $latitude, $longitude, $altitude);
 }
 
 $data = json_encode($data);
@@ -21,5 +21,4 @@ $data = json_encode($data);
 echo($data);
 
 ?>
-
 
