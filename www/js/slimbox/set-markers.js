@@ -153,6 +153,7 @@ function initialize () {
 
   var myOptions = {
     zoom: 16,
+    scrollwheel: false,
     center: new google.maps.LatLng(41.744192, -74.083375),
     mapTypeId: google.maps.MapTypeId.HYBRID
   };
