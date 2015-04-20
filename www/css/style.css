@@ -1422,8 +1422,8 @@
 		#cta .formerize-placeholder {
 			color: rgba(255, 255, 255, 0.75) !important;
 		}
-		
-	
+
+
 
 /* Embeded Linux 2015 Additions */
 
@@ -1443,7 +1443,7 @@
         position: relative;
         padding-bottom: 500px;  // This is the aspect ratio*/
         height: 0;
-        overflow: hidden;	
+        overflow: hidden;
     }
 .el-maps iframe {
         position: absolute;
@@ -1463,7 +1463,7 @@
 #header a{border:none;}
 .el-np-rpi-logo {padding-left:10px;height:100%;margin:0;}
 
-.el-tabs-container {width:50%;margin:auto;}
+.el-tabs-container {width:70%;margin:auto;}
 
 #el-tabs {
   overflow: auto;
@@ -1494,7 +1494,7 @@
 
 #el-tabs a:hover {
     background: #c93434;
-    background: linear-gradient(220deg, transparent 10px, #3983C3 10px);    
+    background: linear-gradient(220deg, transparent 10px, #3983C3 10px);
     border: none;
 }
 
@@ -1505,7 +1505,7 @@
 #el-tabs #current a {
     background: #fff;
     background: linear-gradient(220deg, transparent 10px, #3983C3 10px);
-    text-shadow: none;    
+    text-shadow: none;
     color: #fff;
     border: none;
 }
@@ -1525,5 +1525,5 @@
 
 /*
 #el-content div {
-    height: 220px; 
+    height: 220px;
 }*/
