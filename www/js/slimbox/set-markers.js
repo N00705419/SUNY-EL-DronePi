@@ -14,11 +14,10 @@ var DataProcessing = (function () {
   var markers = [];
 
   var _loadImagesData = function () {
-    // $.getJSON('get-images.php', callback);
     $.ajax({
       url: 'get-images.php',
       dataType: 'json',
-      async: false,
+      async: true,
       success: function (data) {
         imagesData = data;
       }
@@ -56,13 +55,23 @@ var DataProcessing = (function () {
     $.each(data, function (index, element) {
 
       //prepare markers for map
-      markers[index] =  [ '<h3>Gallery</h3>',
+      markers[index] =  [
+        '<h3>Location: ' + element.latitude + ', ' + element.longitude + '</h3>',
         element.latitude,
         element.longitude,
         2,
-        "<div class=\"infowindow\"><a href=" + element.path_to_image  + " onclick='jQuery.slimbox([[\"images/image-2.jpg\", \"caption 1\"], [\"images/image-1.jpg\", \"caption 2\"]], 0);return false' rel=\"lightbox-groupname\" ><img src=\"images/image-2-thumb.jpg\"><img src=\"images/image-1-thumb.jpg\"></a><br /><br /></div>"
-
-        ];
+        ["<div class=\"infowindow\"><a href=",
+          element.path_to_image,
+          " onclick='jQuery.slimbox([ ",
+                //each picture is an array
+                "[\"" + element.path_to_image + "\", \" DateTime: " + element.dateTime + "\"]",
+                "], 0);",
+              "return false' rel=\"lightbox-groupname\" >",
+              "<img src=\"" + element.path_to_image + "\" width=150>",
+          "</a><br /><br />",
+        "</div>"
+        ].join('\n')
+      ];
     });
 
     return markers;
