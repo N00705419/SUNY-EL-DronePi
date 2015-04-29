@@ -61,7 +61,6 @@ def triggerCamera(gpsData):
     }
 
     pathToImage = '../www/images/camera/' + fileName
-    db.dataEntry(dataToDatabase)
 
     try:
         camera.takePicture(options, pathToImage)
@@ -92,12 +91,18 @@ def getMission(pathToFile = 'mission.txt'):
 
     fileMissionLength = len(fileMission) - 1
     # mission is an array of dictionaries
-    mission = dictlist = [dict() for x in range(fileMissionLength - 1)]
+    mission = [dict() for x in range(fileMissionLength - 1)]
 
-    for x in range(2, fileMissionLength + 1):
+    for x in range(2, fileMissionLength):
         mission[x - 2]['latitude'] = float(fileMission[x][8])
         mission[x - 2]['longitude'] = float(fileMission[x][9])
         mission[x - 2]['altitude'] = float(fileMission[x][10])
+
+    # gpsData = [dict() for x in range(2)]
+    # gpsData[0]['latitude'] = float('41.742603')
+    # gpsData[0]['longitude'] = float('-74.080981')
+    # gpsData[1]['latitude'] = float('41.742811')
+    # gpsData[1]['longitude'] = float('-74.080676')
 
     return mission
 
@@ -169,3 +174,5 @@ if __name__ == '__main__' :
         gpsp.running = False
         gpsp.join()
         print "Done. \nExiting."
+
+# print getMission()
