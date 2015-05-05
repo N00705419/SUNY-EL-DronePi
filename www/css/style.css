@@ -1429,7 +1429,6 @@
 
 @media only screen and (max-device-width: 480px) {
 .el-drone-logo {max-width:200px; padding-bottom:45px;}}
-
 .team-block {width:20%;}
 
 .el-about {margin-bottom: 0px;}
@@ -1530,3 +1529,5 @@
 #el-content div {
     height: 220px;
 }*/
+
+.el-group {width:100%;max-width:1000px;}
