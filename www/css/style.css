@@ -1453,6 +1453,9 @@
         height: 500px!important;
 }
 
+#map_canvas .infowindow a {border-bottom:none!important;}
+#map_canvas .infowindow {width:150px!important;margin:auto!important;}
+
 /* Stop Maps API from Scrolling in Embeded unless clicked
 .scrolloff {
         pointer-events: none;
