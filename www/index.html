@@ -18,9 +18,7 @@
 		<script src="js/skel-layers.min.js"></script>
 		<script src="js/init.js"></script>
 		<script src="js/smoothscroll.js"></script>
-		<script type="text/javascript" src="js/scrolltotop.js"></script>
-
-
+		<script type="text/javascript" src="http://arrow.scrolltotop.com/arrow12.js"></script>
 		
 		<!-- TEMPORARY OLD GOOGLE MAPS API<script type="text/javascript"
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgY7lXsV4uZ1cd1wBfVULR2i-k-eOcOsA">
@@ -120,124 +118,34 @@
 				<section class="box special el-about">
 					<header class="major">
 						<h2>About the Drone Project for Embedded Linux - Spring 2015</h2>
-						<p>We are awesome. We're going to fly this thing... it's called a drone. Then we're going to mount a pie on it. Oh wait, sorry, a <i>pi</i>... Hopefully it flies, and the pi won't get destroyed. Along the way, maybe we'll take some pretty pictures.</p>
+						<p>For this project, our group was given a 3DR Hexacopter drone that will be programmed to fly to a fixed set of way stations and return to a base station using the program, Mission Planner. Upon reaching each way station the drone will take a series of images. These images are captured by implementing a Raspberry Pi that runs python scripts which communicate with a GPS module that activate the camera when a way station has been reached.
+						<br/><br/>
+						When the drone returns to the base station, the images that were captured and saved to the database are transmitted to a central location. A web interface will display the images to create a composite view of the area covered by the drone. Consider that when the drone is at a given position, you must be able to rotate the camera at least a few different directions so as to capture a wider swath of area, rather than a single shot in a fixed direction.</p>
+						<br/><br/>
+						<video width="500" controls>
+						  <source src="http://drone.nulldivision.com/files/videos/1-full-test-1.mp4" type="video/mp4">
+						</video>
+						
+						<video width="500" controls>
+						  <source src="http://drone.nulldivision.com/files/videos/2-full-test-2.mp4" type="video/mp4">
+						</video>
+						
+						<video width="500" controls>
+						  <source src="http://drone.nulldivision.com/files/videos/last-fly-test.mp4" type="video/mp4">
+						</video>
+						<br/><br/>
+						<a href="https://github.com/N00705419/SUNY-EL-DronePi/wiki" class="button smoothScroll">Full Documentation @ Github Wiki</a><br/><br/>
 						<!--<a href="code" class="drone-button button special">Files Test</a><br/>-->
 						<p>#PiInTheSky</p><br/>
-						<div class="el-tabs-container">
-							<script type="text/javascript">
-								$(document).ready(function() {
-									$("#el-content div").hide(); // Initially hide all content
-									$("#el-tabs li:first").attr("id","current"); // Activate first tab
-									$("#el-content div:first").fadeIn(); // Show first tab content
-									
-									$('#el-tabs a').click(function(e) {
-										e.preventDefault();        
-										$("#el-content div").hide(); //Hide all content
-										$("#el-tabs li").attr("id",""); //Reset id's
-										$(this).parent().attr("id","current"); // Activate this
-										$('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
-									});
-								})();
-							</script>
-							<ul id="el-tabs">
-								<li><a href="#el-tab1" title="el-tab1">Description</a></li>
-								<li><a href="#el-tab2" title="el-tab2">Goals</a></li>
-								<li><a href="#el-tab3" title="el-tab3">Implementation</a></li>
-								<li><a href="#el-tab4" title="el-tab4">Drone</a></li>
-								<li><a href="#el-tab5" title="el-tab5">Raspberry Pi</a></li>    
-								<li><a href="#el-tab6" title="el-tab6">Website</a></li>    
-							</ul>
-
-							<div id="el-content"> 
-								<div id="el-tab1">For this project, our group was given a 3DR Hexacopter drone that will be programmed to fly to a fixed set of way stations and return to a base station using the program, Mission Planner. Upon reaching each way station the drone will take a series of images. These images are captured by implementing a Raspberry Pi that runs python scripts which communicate with a GPS module that activate the camera when a way station has been reached.<br/><br/>When the drone returns to the base station, the images that were captured and saved to the database are transmitted to a central location. A web interface will display the images to create a composite view of the area covered by the drone. Consider that when the drone is at a given position, you must be able to rotate the camera at least a few different directions so as to capture a wider swath of area, rather than a single shot in a fixed direction.
-
-								</div>
-								<div id="el-tab2">
-									<ol>
-									  <li>Drone Navigation</li>
-										<ul>
-										  <li>The drone will have missions.</li>
-										  <li>Each mission had a dateTime and a list of waypoints.</li>
-										  <li>Each waypoint has the following information: latitude, longitude and altitude.</li>
-										  <li>When leaving for a task, the drone must go to each waypoint, stabilize and take pictures.</li>
-										  <li>The drone should get back to the start point after all points are visited.</li>
-										</ul>
-									  <li>Camera Programming</li>
-										<ul>
-										  <li>When the drone gets in the right position and is stable, the camera must take a picture and save it locally.</li>
-										</ul>
-									  <li>Web Server</li>
-										<ul>
-										  <li>Then the the drone gets back to the internet wifi range, the collected data must be upload to a web server. The data that will be uploaded is the images, time stamp and coordinates.</li>
-										</ul>
-									</ol>
-								</div>
-								<div id="el-tab3">
-									<ol>
-										<li>Make drone fly.</li>
-										<li>Setup server using Digital Ocean.</li>
-										<li>Attach camera to the pi and make a program to take pictures.</li>
-										<li>Make crontab script to take picture n minutes.</li>
-										<li>Setup up gps and make a program to display coordinates.</li>
-										<li>Use a website template.</li>
-										<li>Add Google maps api on website.</li>
-										<li>Make a main program that integrate the camera and gps components.</li>
-										<li>Fly drone with pi, camera and gps attached.</li>
-									</ol>
-								</div>
-								<div id="el-tab4">
-									<h2>Drone</h2>
-									The drone shown below is the Arducopter 3DR Hexa B, which is designed and manufactuered by the company 3D robotics. The drone ulitizes the APM 2.6 which is an open source autopilot system. With the help from Larry, we learned how to set up the drone to fly. (More information on this drone can be found here: <a href="http://store.3drobotics.com/products/arducopter-3dr-hexa-b-1">http://store.3drobotics.com/products/arducopter-3dr-hexa-b-1</a><br/>
-									<img style="width:80%;" src="https://camo.githubusercontent.com/a395de0dd5d71d6821986246df7b2d6445063e5f/687474703a2f2f64726f6e652e6e756c6c6469766973696f6e2e636f6d2f66696c65732f70686f746f732f494d475f32303135303332375f3039343234302e6a7067"/>
-									
-									<h2>APM Mission Planner</h2>
-									The hexcopter has it's own gps module which is used to interface with Mission Planner. Mission Planner makes the hexcopter autonomous. Using this application, we can sent commands such as take off, waypoints, and land for a specific location on the map.<br/>
-									Because the gps is already used, we will need another gps that interface with the raspberry pi to collect the location of the drone to use with the camera.
-									<img style="width:80%;" src="https://camo.githubusercontent.com/20c38f45a358bef3570f56ba96b236d43bc2a21a/687474703a2f2f64726f6e652e6e756c6c6469766973696f6e2e636f6d2f66696c65732f70686f746f732f494d475f32303135303332375f3039343734302e6a7067"/>
-								
-								</div>
-								<div id="el-tab5">
-									<ol>
-									  <li>Camera Setup</li>
-										<ul>
-										  <li>Camera connection</li>
-										  <li>Configuration</li>
-											<ul>
-												<li><code>sudo raspi-config</code></li>
-												<li>Otpion 5 - Camera enable</li>
-											</ul>
-										  <li>The test camera command: <code>raspistill -o image.jpg</code> worked with no issues</li>
-										  <li>Ref: <a href="http://www.raspberrypi.org/documentation/usage/camera/raspicam/raspistill.md">http://www.raspberrypi.org/documentation/usage/camera/raspicam/raspistill.md</a></li>
-										</ul>
-									  <li>GPS setup</li>
-										<ul>
-										  <li>GPS Connection using UART.The way I implement it was using the UART instead of a USB to TTL adapter cable because I had already used both of my USB ports.</li>
-										  <li>Wiring</li>
-											<ul>
-												<li>Connect Vin on GPS module to 3.3V or (5V) on the PI header. Connect both GND</li>
-												<li>Connect TX on the GPS to the RDX on Pi header.</li>
-												<li>Connect RX on the GPS to the TXD on PI header.</li>
-											</ul>
-										</ul>
-									  <li>Web Server</li>
-										<ul>
-										  <li>Then the the drone gets back to the internet wifi range, the collected data must be upload to a web server. The data that will be uploaded is the images, time stamp and coordinates.</li>
-										</ul>
-									</ol>
-								</div>
-								<div id="el-tab6">Stuff, testing.</div>
-								<div id="el-tab7">Stuff, testing.</div>
-							</div>
-						</div>
 					</header>
 					<!--<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>-->
 				</section>
 				
-				<section class="box special features el-team">
-					<a name="Team" href="#Team"></a>
+				<section class="box special features el-team" name="Team" href="#Team">
 					<header class="major">
 						<h2>The Team - Who we are</h2>
-						<p>Well. We're awesome people. [Insert Group Picture]</p>
+						<p>From left to right<br/>Eric Meah - Andrew Haaland - Christopher Santos - Nateena Ramnarine - Franz Vezuli - Federico Castro</p><br/><br/>
+						<img src="images/group-pic.jpg" alt="">
 					</header>
 					<!-- Will use group picture instead --
 					<div class="row">
@@ -305,8 +213,7 @@
 					-->
 				</section>
 				
-				<section name="Map">
-				<a name="Map" href="#Map"></a>
+				<section name="Map" name="Map" href="#Map">
 					<header class="major">
 						<h2>The Map</h2>
 						<p>Missions and Pictures</p>
@@ -317,16 +224,8 @@
 			</section>
 		<!-- Footer -->
 			<footer id="footer">
-				<ul class="icons">
-					<!--<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>-->
-					<li><a href="https://github.com/N00705419/SUNY-EL-DronePi" class="icon fa-github"><span class="label">Github</span></a></li>
-					<!--<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-					<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>-->
-				</ul>
 				<ul class="copyright">
-					<li>&copy; SUNY New Paltz. Embedded Linux - Spring 2015 Drone Project. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					<li>&copy; SUNY New Paltz. Embedded Linux - Spring 2015 Drone Project.</li>
 				</ul>
 			</footer>
 
