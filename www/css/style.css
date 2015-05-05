@@ -1531,3 +1531,8 @@
 }*/
 
 .el-group {width:100%;max-width:1000px;}
+
+#el-video {  
+   width:100%; 
+   max-width:500px; 
+}
